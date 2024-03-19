@@ -1,20 +1,17 @@
-function stringlength (string, maxlength) {
-  return string.length <= maxlength;
+function timeToMinutes(time) {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
 }
 
-console.log(stringlength('проверяемая строка', 20));
+function MeetingTime(workStart, workEnd, MeetingStart, MeetingLength) {
+  const workStartMin = timeToMinutes(workStart);
+  const workEndMin = timeToMinutes(workEnd);
+  const MeetingStartMin = timeToMinutes(MeetingStart);
 
-function palindrom (stringcheck) {
-  let stringreverse = stringcheck.toLowerCase();
-  return stringreverse === stringcheck;
+  const endOfMeeting = MeetingStartMin + MeetingLength;
+
+
+  return MeetingStartMin >= workStartMin && endOfMeeting <= workEndMin;
 }
 
-console.log(palindrom('топот'));
-
-function palindromspace (stringcheckspace) {
-  let stringreversespace = stringcheckspace.toLowerCase().replaceAll('').split('');
-  let stringclearspace = stringcheckspace.replaceAll('').split('');
-  return stringreversespace === stringclearspace;
-}
-
-console.log(palindromspace('Лёша на полке клопа нашёл '));
+console.log(MeetingTime('08:00', '17:30', '14:00', 90)); //
